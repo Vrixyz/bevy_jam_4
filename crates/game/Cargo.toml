@@ -1,0 +1,13 @@
+[package]
+name = "game"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy = "0.12"
+inventory = { path = "../inventory" }
+bevy_mod_picking = "0.17"
+rand = "0.8.5"
+rand_chacha = "0.3"
