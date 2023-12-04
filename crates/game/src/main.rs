@@ -145,7 +145,11 @@ fn spawn_share_button(
         HIGHLIGHT_TINT,
         PickableBundle::default(),
         On::<Pointer<Click>>::target_commands_mut(|_click, target_commands| {
-            webbrowser::open("https://twitter.com/intent/tweet?text=Bevy%20Jam%20is%20awesome");
+            let encoded = urlencoding::encode("With #bevygamejam, become an artist with bevy da vinci, check it out at https://vrixyz.itch.io/bevydavinci");
+            webbrowser::open(&format!(
+                "https://twitter.com/intent/tweet?text={}",
+                encoded
+            ));
         }),
     );
     commands.spawn(visual);
