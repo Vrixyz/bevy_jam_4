@@ -11,3 +11,4 @@ inventory = { path = "../inventory" }
 bevy_mod_picking = "0.17"
 rand = "0.8.5"
 rand_chacha = "0.3"
+open = "5"
