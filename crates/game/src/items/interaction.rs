@@ -76,7 +76,9 @@ fn click_get_out(
 fn verify_empty_space(mut commands: Commands, q_requests: Query<(Entity, &BuildRequest)>) {
     for br in q_requests.iter() {
         info!("build at: {}", &br.1.position.x);
-        if br.1.position.x < -200f32 {
+        if !(-200f32..300f32).contains(&br.1.position.x)
+            || !(-100f32..250f32).contains(&br.1.position.y)
+        {
             info!("forbidden");
             commands.entity(br.0).insert(RefusedBuild::NotEnoughPlace);
         }
