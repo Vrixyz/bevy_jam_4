@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use bevy::{prelude::*, render::view::screenshot::ScreenshotManager, window::PrimaryWindow};
 
 pub struct ScreenshotPlugin;
@@ -16,7 +18,17 @@ fn screenshot_system(
     mut counter: Local<u32>,
 ) {
     if input.just_pressed(KeyCode::Space) {
-        let path = format!("./screenshot-{}.png", *counter);
+        let path = {
+            if cfg!(target_arch = "wasm32") {
+                format!("./screenshot{}.png", *counter)
+            } else {
+                let homedir = simple_home_dir::home_dir().unwrap_or_else(|| {
+                    log::warn!("Failed to get home directory.");
+                    PathBuf::new()
+                });
+                format!("{}/screenshot{}.png", homedir.to_string_lossy(), *counter)
+            }
+        };
         *counter += 1;
         screenshot_manager
             .save_screenshot_to_disk(main_window.single(), path)
