@@ -17,21 +17,42 @@ fn screenshot_system(
     mut screenshot_manager: ResMut<ScreenshotManager>,
     mut counter: Local<u32>,
 ) {
+    // the reason why i didn't use if cfg!() is because
+    // import for `rfd` is undeclared when done so
+    // that's why only viable solution is to use
+    // `get_path` function.
+
+    // the reason why `get_path` is a closure is because
+    // you cannot move `counter` inside a regular function
+
+    #[cfg(target_arch = "wasm32")]
+    let get_path = || Some(PathBuf::from(format!("./screenshot{}.png", *counter)));
+
+    #[cfg(not(target_arch = "wasm32"))]
+    let get_path = || {
+        use rfd::FileDialog;
+        let homedir = simple_home_dir::home_dir().unwrap_or_else(|| {
+            log::warn!("Failed to get home directory.");
+            PathBuf::new()
+        });
+        FileDialog::new()
+            .set_directory(homedir)
+            .set_file_name(format!("screenshot{}.png", *counter))
+            .save_file()
+    };
+
     if input.just_pressed(KeyCode::Space) {
-        let path = {
-            if cfg!(target_arch = "wasm32") {
-                format!("./screenshot{}.png", *counter)
-            } else {
-                let homedir = simple_home_dir::home_dir().unwrap_or_else(|| {
-                    log::warn!("Failed to get home directory.");
-                    PathBuf::new()
-                });
-                format!("{}/screenshot{}.png", homedir.to_string_lossy(), *counter)
-            }
-        };
+        let path = get_path();
         *counter += 1;
-        screenshot_manager
-            .save_screenshot_to_disk(main_window.single(), path)
-            .unwrap();
+        match path {
+            Some(path) => {
+                screenshot_manager
+                    .save_screenshot_to_disk(main_window.single(), path)
+                    .unwrap();
+            }
+            None => {
+                log::warn!("Save path does not exist.");
+            }
+        }
     }
 }
