@@ -1911,6 +1911,7 @@ dependencies = [
  "inventory",
  "rand",
  "rand_chacha",
+ "screenshot",
  "urlencoding",
  "webbrowser",
 ]

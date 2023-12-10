@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 bevy = "0.12"
 inventory = { path = "../inventory" }
+screenshot = { path = "../screenshot" }
 bevy_mod_picking = "0.17"
 rand = "0.8.5"
 rand_chacha = "0.3"
