@@ -5,6 +5,5 @@ edition = "2021"
 
 [dependencies]
 bevy = "0.12"
-native-dialog = "0.7.0"
 simple-home-dir = "0.2.0"
 log = "0.4.20"
