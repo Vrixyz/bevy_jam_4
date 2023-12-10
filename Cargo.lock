@@ -3370,6 +3370,7 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "native-dialog",
+ "simple-home-dir",
 ]
 
 [[package]]
@@ -3423,6 +3424,15 @@ name = "simd-adler32"
 version = "0.3.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d66dc143e6b11c1eddc06d5c423cfc97062865baf299914ab64caa38182078fe"
+
+[[package]]
+name = "simple-home-dir"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "509fcbd8f28460b50b91c057bbc479dc0257f470f94c4564beb38c22c19fdaae"
+dependencies = [
+ "windows-sys 0.48.0",
+]
 
 [[package]]
 name = "slab"
