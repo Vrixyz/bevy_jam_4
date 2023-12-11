@@ -80,7 +80,7 @@ impl Plugin for InventoryPlugin {
         app.add_plugins(items::Plugin);
         app.add_plugins(items::interaction::Plugin);
         app.add_plugins(simple_mouse::MousePlugin);
-        // #[cfg(not(target_arch = "wasm32"))]
+        #[cfg(not(target_arch = "wasm32"))]
         app.add_plugins(screenshot::ScreenshotPlugin);
         app.add_systems(Startup, spawn_camera);
         app.add_systems(Startup, spawn_share_button);
