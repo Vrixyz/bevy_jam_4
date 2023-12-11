@@ -1,12 +1,16 @@
 use std::path::PathBuf;
 
-use bevy::{prelude::*, render::view::screenshot::ScreenshotManager, window::PrimaryWindow};
+use bevy::{
+    prelude::*, render::view::screenshot::ScreenshotManager, ui::widget::UiImageSize,
+    window::PrimaryWindow,
+};
 
 pub struct ScreenshotPlugin;
 
 impl Plugin for ScreenshotPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Update, screenshot_system);
+        app.add_systems(Startup, init_info_msg)
+            .add_systems(Update, screenshot_system);
     }
 }
 
@@ -55,4 +59,27 @@ fn screenshot_system(
             }
         }
     }
+}
+
+fn init_info_msg(mut commands: Commands, asset_server: Res<AssetServer>) {
+    commands
+        .spawn(NodeBundle {
+            style: Style {
+                width: Val::Percent(100.0),
+                height: Val::Percent(100.0),
+                align_items: AlignItems::Start,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },
+            ..default()
+        })
+        .with_children(|parent| {
+            parent.spawn(TextBundle::from_section(
+                "Spacebar to screenshot",
+                TextStyle {
+                    font_size: 16.0,
+                    ..default()
+                },
+            ));
+        });
 }
