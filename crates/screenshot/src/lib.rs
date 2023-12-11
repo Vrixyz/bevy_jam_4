@@ -66,7 +66,7 @@ fn init_info_msg(mut commands: Commands, asset_server: Res<AssetServer>) {
         .spawn(NodeBundle {
             style: Style {
                 width: Val::Percent(100.0),
-                height: Val::Percent(100.0),
+                height: Val::Px(100.0),
                 align_items: AlignItems::Start,
                 justify_content: JustifyContent::Center,
                 ..default()

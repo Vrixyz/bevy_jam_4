@@ -801,7 +801,6 @@ dependencies = [
  "bevy_picking_ui",
  "bevy_reflect",
  "bevy_render",
- "bevy_text",
  "bevy_ui",
  "bevy_utils",
  "bevy_window",

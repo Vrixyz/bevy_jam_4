@@ -9,7 +9,13 @@ edition = "2021"
 bevy = "0.12"
 inventory = { path = "../inventory" }
 screenshot = { path = "../screenshot" }
-bevy_mod_picking = "0.17"
+bevy_mod_picking = { version = "0.17", default-features = false, features = [
+    "backend_sprite",
+    "backend_bevy_ui",
+    "backend_raycast",
+    "selection",
+    "highlight",
+] }
 rand = "0.8.5"
 rand_chacha = "0.3"
 webbrowser = "0.8"
