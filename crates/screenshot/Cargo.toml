@@ -1,0 +1,10 @@
+[package]
+name = "screenshot"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bevy = "0.12"
+simple-home-dir = "0.2.0"
+log = "0.4.20"
+rfd = "0.12.1"
